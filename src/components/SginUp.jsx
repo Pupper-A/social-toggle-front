@@ -7,7 +7,8 @@ function SignUp() {
         last_name: "",
         username: "",
         email: "",
-        password: ""
+        password: "",
+        image: ""
     })
     function addUser(event){
         axios({
@@ -18,20 +19,26 @@ function SignUp() {
                 last_name: signUpForm.last_name,
                 username: signUpForm.username,
                 email: signUpForm.email,
-                password: signUpForm.password
+                password: signUpForm.password,
+                avatar: signUpForm.image
+            },
+            headers:{
+                "Content-Type": "multipart/form-data",
             }
-          })
-            setSignUpForm((
-                {
-                    first_name: "",
-                    last_name: "",
-                    username: "",
-                    email: "",
-                    password: ""
-                }
-            ))
+        })
+        console.log(signUpForm.image.name)
+        setSignUpForm((
+            {
+                first_name: "",
+                last_name: "",
+                username: "",
+                email: "",
+                password: "",
+                image: ""
+            }
+        ))
 
-            event.preventDefault()
+        event.preventDefault()
         
     }
 
@@ -42,12 +49,19 @@ function SignUp() {
         )
     }
 
+    const handleImageChange = (e) => {
+        let newForm = { ...signUpForm };
+        newForm["image"] = e.target.files[0];
+        setSignUpForm(newForm);
+    };
+
     return (
-        <form action="post">
+        <form action="post" enctype="multipart/form-data">
             <input onChange={handleChange} type="text" placeholder="first name" name="first_name" value={signUpForm.first_name} /><br />
             <input onChange={handleChange} type="text" placeholder="last name" name="last_name" value={signUpForm.last_name} /><br />
             <input onChange={handleChange} type="text" placeholder="username" name="username" value={signUpForm.username} /><br />
             <input onChange={handleChange} type="email" placeholder="email" name="email" value={signUpForm.email} /><br />
+            <input onChange={(e) => {handleImageChange(e);}} type="file" name="image"/><br />
             <input onChange={handleChange} type="password" placeholder="password" name="password" value={signUpForm.password} /><br />
             <button onClick={addUser}>Sign Up</button>
         </form>
