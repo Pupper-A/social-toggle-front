@@ -10,22 +10,26 @@ function SignUp() {
         password: "",
         image: ""
     })
-    function addUser(event){
-        axios({
+    async function addUser(event){
+         await axios({
             method: "POST",
-            url:"/signup/",
+            url:"/api/signup/",
             data:{
                 first_name: signUpForm.first_name,
                 last_name: signUpForm.last_name,
                 username: signUpForm.username,
                 email: signUpForm.email,
                 password: signUpForm.password,
-                avatar: signUpForm.image
+                avatar: signUpForm.image,
+                is_superuser: 0,
+                is_staff: 0,
+                is_active: 0,
             },
             headers:{
                 "Content-Type": "multipart/form-data",
             }
         })
+
         console.log(signUpForm.image.name)
         setSignUpForm((
             {
@@ -56,7 +60,7 @@ function SignUp() {
     };
 
     return (
-        <form action="post" enctype="multipart/form-data">
+        <form action="post" encType="multipart/form-data">
             <input onChange={handleChange} type="text" placeholder="first name" name="first_name" value={signUpForm.first_name} /><br />
             <input onChange={handleChange} type="text" placeholder="last name" name="last_name" value={signUpForm.last_name} /><br />
             <input onChange={handleChange} type="text" placeholder="username" name="username" value={signUpForm.username} /><br />
