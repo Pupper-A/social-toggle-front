@@ -17,7 +17,7 @@ function Footer() {
     setValue(newValue);
   };
   return (
-    <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
+    <Paper sx={{ width:"100%" , position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
                 {/* <Col className='text-center py-3'>Copyright &copy; ToggleMedia</Col> */}
             
       <BottomNavigation
