@@ -3,9 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import { Row, Col, Alert, Container } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Loader from '../components/Loader';
-import BootstrapSwitchButton from 'bootstrap-switch-button-react';
+// import BootstrapSwitchButton from 'bootstrap-switch-button-react';
 import { sendToggle } from '../actions/toggleActions';
 import axios from "axios";
+import { MuiSwitch } from '../components/MuiSwitch';
 
 function DashboardScreen() {
     const [toggle, setToggle] = useState("")
@@ -106,18 +107,26 @@ function DashboardScreen() {
         <Col></Col>
         <Col className="my-5 py-5 text-center">
             <p>What is your MOOD?</p>
-            <BootstrapSwitchButton
+            {/* <BootstrapSwitchButton
              checked={toggle} 
              width={200} 
              height={100} 
              onlabel="Happy" 
              offlabel='Sad' 
-             onstyle='success' 
+             onstyle='warning' 
              offstyle='info' 
              style="border" 
              onChange={toggleHandler}
              onClick={toggleHandler}
-             />
+             /> */}
+
+             {/* the next switch button */}
+             <MuiSwitch
+                checked={toggle} 
+                onChange={toggleHandler}
+                onClick={toggleHandler}
+              />
+
              <p>{time && (time < 60 ? time + " Minutes" : Math.round(time/60) + " Hours")}</p>
         </Col>
         <Col></Col>
