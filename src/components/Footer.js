@@ -30,9 +30,8 @@ function Footer() {
             color: "#007A78",
             
           },
-          "& .MuiBottomNavigationAction-root, .Mui-selected, svg": {
+          "& .MuiBottomNavigationAction-root": {
             backgroundColor: "#F0F0F0",
-            bottom: 0,
           }
       }}
 
