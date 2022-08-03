@@ -1,6 +1,7 @@
 import React from 'react';
-import Header from './components/Header';
-import Footer from './components/Footer';
+// import Header from './components/Header';
+import BasicMenu from './components/BasicMenu';
+// import Footer from './components/Footer';
 import { Container } from 'react-bootstrap';
 import { HashRouter as Router, Route, Routes } from 'react-router-dom';
 import HomeScreen from './screens/HomeScreen';
@@ -12,10 +13,9 @@ import StatsScreen from './screens/StatsScreen';
 import FindPeople from './screens/FindPeople';
 import ProfileScreen from './screens/ProfileScreen';
 import { useEffect } from 'react';
-
 import icon from './toggle-on-solid.png';
-
 import axios from 'axios';
+import { BottomNav } from './components/BottomNav';
 
 axios.defaults.xsrfCookieName = 'csrftoken'
 axios.defaults.xsrfHeaderName = 'X-CSRFToken'
@@ -27,7 +27,7 @@ function App() {
   }, []);
   return (
     <Router>
-        <Header />
+        <BasicMenu />
         <main className='py-5'>
             <Container>
                 <Routes>
@@ -43,7 +43,7 @@ function App() {
                 </Routes>
             </Container>
         </main>
-        <Footer />
+        <BottomNav />
     </Router>
   )
 }
