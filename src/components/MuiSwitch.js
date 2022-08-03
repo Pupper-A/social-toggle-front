@@ -1,56 +1,182 @@
 import React from 'react'
-import { Box, FormControlLabel, Switch } from '@mui/material'
 import { useState } from 'react'
+import { useEffect } from 'react';
+import Switch from '@mui/material/Switch';
+import { useDispatch, useSelector } from 'react-redux';
 import { styled } from '@mui/material/styles';
-import FormGroup from '@mui/material/FormGroup';
-import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
+import { Box } from '@mui/system';
+import { sendToggle } from '../actions/toggleActions';
+import { useNavigate } from 'react-router-dom';
+import axios from "axios";
 
-// export const MuiSwitch = () => {
-//     const [checked, setChecked] = useState(false)
-//     const handleChange = (event) => {
-//         setChecked(event.target.checked)
-//     }
-//   return (
-//     <Box>
-//         <FormControlLabel
-//         label='Dark mode'
-//         control={<Switch checked={checked} onChange={handleChange} />}
-//          />
-//     </Box>
-//   )
-// }
 
-export const MuiSwitch = styled(Switch)(({ theme }) => ({
-    padding: 8,
-    '& .MuiSwitch-track': {
-      borderRadius: 22 / 2,
-      '&:before, &:after': {
-        content: '""',
-        position: 'absolute',
-        top: '50%',
-        transform: 'translateY(-50%)',
-        width: 16,
-        height: 16,
-      },
-      '&:before': {
-        backgroundImage: `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 24 24"><path fill="${encodeURIComponent(
-          theme.palette.getContrastText(theme.palette.primary.main),
-        )}" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"/></svg>')`,
-        left: 12,
-      },
-      '&:after': {
-        backgroundImage: `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 24 24"><path fill="${encodeURIComponent(
-          theme.palette.getContrastText(theme.palette.primary.main),
-        )}" d="M19,13H5V11H19V13Z" /></svg>')`,
-        right: 12,
-      },
+
+
+const MaterialUISwitch = styled(Switch)(({ theme }) => ({
+  width: 107.86,
+  height: 60,
+  padding: 7,
+  '& .MuiSwitch-switchBase': {
+    color: '#340546',
+    margin: 5,
+    padding: 0,
+    transform: 'translateX(0px)',
+    '&.Mui-checked': {
+      color: '#F76E09',
+      transform: 'translateX(49px)',
     },
-    '& .MuiSwitch-thumb': {
-      boxShadow: 'none',
-      width: 16,
-      height: 16,
-      margin: 2,
-    },
-  }));
- 
+  },
+  '& .MuiSwitch-thumb': {
+    width: 50,
+    height:50,
+  },
+  '& .css-ars20s-MuiButtonBase-root-MuiSwitch-switchBase.Mui-disabled':{
+    color:'#340546'
+  },
+  '& .css-ars20s-MuiButtonBase-root-MuiSwitch-switchBase.Mui-checked.Mui-disabled':{
+    color:'#F76E09'
+  },
+  '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': { 
+    backgroundColor: '#F76E09',
+    borderRadius: 100 / 2,
+  },
+  '& .MuiSwitch-track': {
+    backgroundColor: '#340546',
+    borderRadius: 100 / 2,
+  },
+  
+}));
+
+export default function CustomizedSwitches() {
+    const [isToggled, setIsToggled] = useState("");
+    const [disabled, setDisabled] = useState(false);
+    const [seconds, setSeconds] = useState(0);
+    const [date, setDate] = useState('')
+
+    const dispatch = useDispatch();
+    const history = useNavigate();
+    const userToggle = useSelector(state => state.toggle);
+    let token = null;
+    let redirect = "";
+
+    //DISABLES TOGGLE FOR 5 SECONDS//
+    const disableTime = () => {
+        setDisabled(true);
+    
+        setTimeout(() => {
+            setDisabled(false);
+        }, 3000)}
+
+
+    //RESETS TIMER
+    function reset() {
+      setSeconds(0);
+
+    }
+    //TOGGLES THE SWITCH AND RESETS TIME ON EVERY TOGGLE
+    const onToggle = () => {
+      reset();
+      var bool = 0
+      setIsToggled(!isToggled);
+            if(isToggled == true){
+                bool = 0
+            }else{
+                bool = 1
+            }
+            const userId = JSON.parse(localStorage.getItem("userInfo")).id
+            dispatch(sendToggle(userId, bool))
+    }
+
+
+    
+    useEffect(() => {
+      const userInfo = localStorage.getItem("userInfo")
+
+      if(userInfo){
+          token = "Bearer " + JSON.parse(userInfo).token
+      }else{
+          redirect = "/"
+          history(redirect)
+      }
+
+      async function getToggleInfo(){
+          const config = {
+              headers: {
+                  "Authorization": token
+              }
+          }
+          
+          await axios.get("/api/users/toggle/", config).then((response) => {
+              if(response.data){
+                  a = new Date(response.data.toggled_time)
+                  setIsToggled(response.data.is_toggled)
+                  
+              }else if(!localStorage.getItem("userInfo")){
+                  redirect = "/"
+                  history(redirect)
+              }else{
+                  redirect = "/new-user"
+                  history(redirect)
+              }
+              
+          })
+      }
+      
+      let a = null
+
+      getToggleInfo()
+
+    
+      let interval = setInterval(() => {
+          let b = new Date()
+          let def = String(Math.round((b-a)/60000))
+          setDate(def)
+
+      }, 1000);
+      return () => clearInterval(interval);
+  }, [isToggled])
+
+
+
+    //EVERYTIME YOU TOGGLE IT ADDS ONE TO SECONDS RETURNS IT
+    useEffect(()=>{
+      let interval = null;
+      if(isToggled || !isToggled){
+        // console.log(Date());
+
+
+        interval = setInterval(() => {
+          setSeconds(seconds => seconds + 1);
+        }, 1000);
+        // localStorage.setItem('seconds', JSON.stringify(seconds))
+        // localStorage.setItem('mood', JSON.stringify(isToggled))
+      }
+      return () => clearInterval(interval);
+    },  [isToggled, seconds])
+           
+        
+  return (
+    <Box>
+        <p sx={{padding:20}}>
+             {isToggled ? <span >You are Happy :)</span> : <span>You are Sad :( </span>}
+        </p>
+        <MaterialUISwitch
+        defaultChecked color="warning"
+        checked={isToggled}
+        onClick={onToggle}
+        onChange={disableTime}
+        disabled={disabled}
+        sx={{ justifyContent:'center'}}/>
+        <p>{seconds} seconds
+        <br />
+        <p>{date && (date < 60 ? date + " Minutes" : Math.round(date/60) + " Hours")}</p>
+
+        </p>
+
+        
+    </Box>
+  );
+  }
+
+
+
