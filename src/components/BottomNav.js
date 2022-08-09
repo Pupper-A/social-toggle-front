@@ -8,14 +8,13 @@ import Paper from '@mui/material/Paper';
 import { Link } from 'react-router-dom';
 
 export const BottomNav = () => {
-    const [value, setValue] = React.useState('profile');
+    const [value, setValue] = React.useState('Feed');
 
     const handleChange = (event, newValue) => {
       setValue(newValue);
     };
     return (
       <Paper sx={{ width:"100%" , position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
-                  {/* <Col className='text-center py-3'>Copyright &copy; ToggleMedia</Col> */}
               
         <BottomNavigation
            value={value}
@@ -31,6 +30,10 @@ export const BottomNav = () => {
               backgroundColor: "#F0F0F0",
               color:'black',
               width:"100%"
+            },
+            '& .Mui-selected':{
+              color: "#1E8582",
+
             }
         }}
   

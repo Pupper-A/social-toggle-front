@@ -12,18 +12,17 @@ import StatsScreen from './screens/StatsScreen';
 import FindPeople from './screens/FindPeople';
 import ProfileScreen from './screens/ProfileScreen';
 import { useEffect } from 'react';
-import '@fontsource/roboto/300.css';
+// import '@fontsource/roboto/300.css';
 import icon from './toggle-on-solid.png';
 import axios from 'axios';
 import { BottomNav } from './components/BottomNav';
 import CssBaseline from '@mui/material/CssBaseline';
-import { Box } from '@material-ui/core';
-import Container from "@mui/material/Container";
 
 
 
 axios.defaults.xsrfCookieName = 'csrftoken'
 axios.defaults.xsrfHeaderName = 'X-CSRFToken'
+
 
 function App() {
 
@@ -32,7 +31,6 @@ function App() {
             <BasicMenu />
             <main className='py-5'>
                 <CssBaseline />
-
                 <Routes>
                     <Route path="/" element={<HomeScreen />} exact />
                     <Route path="/login" element={<LoginScreen />} exact />

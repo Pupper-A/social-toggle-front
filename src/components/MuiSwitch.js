@@ -51,33 +51,35 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
 export default function CustomizedSwitches() {
   const [isToggled, setIsToggled] = useState("");
   const [disabled, setDisabled] = useState(false);
-  const [seconds, setSeconds] = useState(0);
   const [date, setDate] = useState('')
+  const [toggledTime, setToggledTime] = useState("");
 
   const dispatch = useDispatch();
   const history = useNavigate();
-  const userToggle = useSelector(state => state.toggle);
-  let token = null;
-  let redirect = "";
-
-  //DISABLES TOGGLE FOR 10 SECONDS//
+  
+  //DISABLES TOGGLE FOR 10 Minutes//
   const disableTime = () => {
     setDisabled(true);
 
     setTimeout(() => {
       setDisabled(false);
-    }, 10000)
+    }, 600000)
   }
+//We can get the data forwarded from post request action with state from our store
+  const userToggle = useSelector(state => state.toggle);
+
+//Then store data infomations tin variables
+  const {error, loading, toggleInfo} = userToggle
+
+  let token = null;
+  let redirect = "";
 
 
-  //RESETS TIMER
-  function reset() {
-    setSeconds(0);
 
-  }
+
   //TOGGLES THE SWITCH AND RESETS TIME ON EVERY TOGGLE
   const onToggle = () => {
-    reset();
+
     var bool = 0
     setIsToggled(!isToggled);
     if (isToggled == true) {
@@ -101,60 +103,79 @@ export default function CustomizedSwitches() {
       history(redirect)
     }
 
-    async function getToggleInfo() {
-      const config = {
-        headers: {
-          "Authorization": token
-        }
+    // async function getToggleInfo() {
+    //   const config = {
+    //     headers: {
+    //       "Authorization": token
+    //     }
+    //   }
+
+    //   await axios.get("/api/users/toggle/", config).then((response) => {
+    //     if (response.data) {
+    //       a = new Date(response.data.toggled_time)
+    //       setIsToggled(response.data.is_toggled)
+
+    //     } else if (!localStorage.getItem("userInfo")) {
+    //       redirect = "/"
+    //       history(redirect)
+    //     } else {
+    //       redirect = "/new-user"
+    //       history(redirect)
+    //     }
+
+    //   })
+    // }
+
+    let ToggledTime = null
+
+  //Because we stored toggled data in localStorage
+  //we check the data exists in localStorage or not
+    if(localStorage.getItem("toggleInfo")){
+
+    //Then we create a date object from localStore info
+      let toggleInfo = JSON.parse(localStorage.getItem("toggleInfo"))
+      ToggledTime = new Date(toggleInfo.toggled_time)
+      
+      //We check if there is no error and loading isn't
+      //true from posting our request we get toggled info
+      //and store it in isToggled state
+      if( !error && loading != true ){
+        setIsToggled(toggleInfo.is_toggled)
       }
-
-      await axios.get("/api/users/toggle/", config).then((response) => {
-        if (response.data) {
-          a = new Date(response.data.toggled_time)
-          setIsToggled(response.data.is_toggled)
-
-        } else if (!localStorage.getItem("userInfo")) {
-          redirect = "/"
-          history(redirect)
-        } else {
-          redirect = "/new-user"
-          history(redirect)
-        }
-
-      })
     }
 
-    let a = null
-
-    getToggleInfo()
-
-
-    let interval = setInterval(() => {
-      let b = new Date()
-      let def = String(Math.round((b - a) / 60000))
+    //Else we check if toggled data isn't in localStorage
+    //We redirect user to homeScreen
+    //(read comments from this file and then read comments in HomeSceen file)
+    else{
+      redirect = "/"
+      history(redirect)
+    }
+    
+    // function that store the time between two mood
+    const setDateFunc = () => {
+      let now = new Date()
+      let def = String(Math.round((now - ToggledTime) / 60000))
       setDate(def)
-
-    }, 1000);
-    return () => clearInterval(interval);
-  }, [isToggled])
-
-
-
-  //IGNORE THIS
-  useEffect(() => {
-    let interval = null;
-    if (isToggled || !isToggled) {
-      // console.log(Date());
-
-
-      interval = setInterval(() => {
-        setSeconds(seconds => seconds + 1);
-      }, 1000);
-      // localStorage.setItem('seconds', JSON.stringify(seconds))
-      // localStorage.setItem('mood', JSON.stringify(isToggled))
     }
+    
+    //call that function 
+    setDateFunc()
+    
+    //every 1 minute this update our time with help of setDateFunc
+    let interval = setInterval(() => {
+      setDateFunc()
+    }, 60000);
     return () => clearInterval(interval);
-  }, [isToggled, seconds])
+
+    //We can pass dependecies to useEffect and when
+    //one dependency changed the useEffect runs again.
+    //We pass loading as dependency because the loading
+    //variable talles us when posting the data to back is
+    //finished.
+  }, [loading, isToggled])
+
+
 
 
   return (
