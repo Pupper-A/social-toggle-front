@@ -11,17 +11,24 @@ import ProfileCard from '../components/ProfileCard';
 import { Typography } from '@mui/material';
 
 function DashboardScreen() {
-
+const style = {
+  backgroundColor:'#F5F5F5',
+  height:'430px'
+  
+}
+const cardStyle ={
+  height:'270px'
+}
 
   return (
       <Container>     
-        <Row>
-            <Col className="my-4 py-4 text-center justify-content-center">     
+        <Row style={cardStyle}>
+            <Col className="mb-5  text-center justify-content-center">     
                 <ProfileCard />
             </Col>
         </Row>
 
-        <Row>
+        <Row  style={style}>
         
         <Col className="my-5 py-5 text-center">
             <CustomizedSwitches
@@ -30,6 +37,7 @@ function DashboardScreen() {
         </Col>
         
         </Row>
+       
       </Container>
       
   )
