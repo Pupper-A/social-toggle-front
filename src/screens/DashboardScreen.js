@@ -9,11 +9,13 @@ import axios from "axios";
 import CustomizedSwitches, { BasicSwitch } from '../components/MuiSwitch';
 import ProfileCard from '../components/ProfileCard';
 import { Typography } from '@mui/material';
+import BasicMenu from '../components/BasicMenu';
 
 function DashboardScreen() {
 const style = {
   backgroundColor:'#F5F5F5',
-  height:'430px'
+  height:'430px',
+  marginTop: '45px'
   
 }
 const cardStyle ={
@@ -21,9 +23,10 @@ const cardStyle ={
 }
 
   return (
-      <Container>     
+      <Container>  
+        <BasicMenu />   
         <Row style={cardStyle}>
-            <Col className="mb-5  text-center justify-content-center">     
+            <Col className="my-5  text-center justify-content-center">     
                 <ProfileCard />
             </Col>
         </Row>
