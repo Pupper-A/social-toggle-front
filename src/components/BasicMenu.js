@@ -21,7 +21,7 @@ export default function BasicMenu() {
         onClick={openMenu}
         sx = {{position:'fixed', paddingTop: 3, paddingRight: '14', width:'100%', justifyContent:'flex-end', color:"#1E8582"}}
         >
-            <MenuIcon />
+            <MenuIcon style={{fontSize:'2rem'}} />
 
         </Button>
         <Menu
