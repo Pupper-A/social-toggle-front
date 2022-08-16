@@ -50,7 +50,7 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
 
 export default function CustomizedSwitches() {
   const [isToggled, setIsToggled] = useState("");
-  const [disabled, setDisabled] = useState(false);
+  const [disabled, setDisabled] = useState(null);
   const [date, setDate] = useState('')
   const [toggledTime, setToggledTime] = useState("");
 
@@ -58,13 +58,9 @@ export default function CustomizedSwitches() {
   const history = useNavigate();
   
   //DISABLES TOGGLE FOR 10 Minutes//
-  const disableTime = () => {
-    setDisabled(true);
 
-    setTimeout(() => {
-      setDisabled(false);
-    }, 600000)
-  }
+
+
 //We can get the data forwarded from post request action with state from our store
   const userToggle = useSelector(state => state.toggle);
 
@@ -102,30 +98,6 @@ export default function CustomizedSwitches() {
       redirect = "/"
       history(redirect)
     }
-
-    // async function getToggleInfo() {
-    //   const config = {
-    //     headers: {
-    //       "Authorization": token
-    //     }
-    //   }
-
-    //   await axios.get("/api/users/toggle/", config).then((response) => {
-    //     if (response.data) {
-    //       a = new Date(response.data.toggled_time)
-    //       setIsToggled(response.data.is_toggled)
-
-    //     } else if (!localStorage.getItem("userInfo")) {
-    //       redirect = "/"
-    //       history(redirect)
-    //     } else {
-    //       redirect = "/new-user"
-    //       history(redirect)
-    //     }
-
-    //   })
-    // }
-
     let ToggledTime = null
 
   //Because we stored toggled data in localStorage
@@ -151,20 +123,35 @@ export default function CustomizedSwitches() {
       redirect = "/"
       history(redirect)
     }
-    
+    // this function checks if its been 10 mins since last toggle, then disable/enables it
+    const setDisabledFunc = () => {
+      let now = new Date()
+      let def = String(Math.round((now - ToggledTime) / 60000))
+      if(def<10){
+        setDisabled(true);
+      }else {
+        setDisabled(false);
+      }
+    } 
+    setDisabledFunc()
+
     // function that store the time between two mood
     const setDateFunc = () => {
       let now = new Date()
       let def = String(Math.round((now - ToggledTime) / 60000))
+      
       setDate(def)
+     
     }
     
     //call that function 
     setDateFunc()
     
+    
     //every 1 minute this update our time with help of setDateFunc
     let interval = setInterval(() => {
       setDateFunc()
+
     }, 60000);
     return () => clearInterval(interval);
 
@@ -173,7 +160,7 @@ export default function CustomizedSwitches() {
     //We pass loading as dependency because the loading
     //variable talles us when posting the data to back is
     //finished.
-  }, [loading, isToggled])
+  }, [loading, onToggle])
 
 
 
@@ -184,10 +171,10 @@ export default function CustomizedSwitches() {
         {isToggled ? <span >You are Happy</span> : <span>You are Sad</span>}
       </Typography>
       <MaterialUISwitch
+        id='buttonid'
         defaultChecked color="warning"
         checked={isToggled}
         onClick={onToggle}
-        onChange={disableTime}
         disabled={disabled}
         sx={{ justifyContent: 'center' }} />
       <p>
