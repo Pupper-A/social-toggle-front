@@ -23,8 +23,8 @@ const ProfileCard = () => {
             }}>
                 <PersonIcon
                 sx={{
-                    width:42.2,
-                    height:42.2
+                    width:60.2,
+                    height:60.2
                 }} />
             </Avatar>
             <div className='subtitle'>
@@ -41,7 +41,7 @@ const ProfileCard = () => {
 
             
             <Button className='mui-btn' variant='contained' 
-                sx={{ borderRadius: 50, backgroundColor:'#1E8582', textTransform: 'none'
+                sx={{ borderRadius: 50, backgroundColor:'#1E8582', textTransform: 'none', margin:'16px'
                 ,
                 '&:hover':{
                   backgroundColor:'#1E8582'
