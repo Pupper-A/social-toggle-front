@@ -28,8 +28,8 @@ function App() {
 
     return (
         <Router>
-            <BasicMenu />
-            <main className='py-5'>
+
+            <main>
                 <CssBaseline />
                 <Routes>
                     <Route path="/" element={<HomeScreen />} exact />
