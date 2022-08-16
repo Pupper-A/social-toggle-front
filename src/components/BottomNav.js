@@ -8,7 +8,7 @@ import Paper from '@mui/material/Paper';
 import { Link } from 'react-router-dom';
 
 export const BottomNav = () => {
-    const [value, setValue] = React.useState('Feed');
+    const [value, setValue] = React.useState('Profile');
 
     const handleChange = (event, newValue) => {
       setValue(newValue);
@@ -63,7 +63,7 @@ export const BottomNav = () => {
              /> */}
              <BottomNavigationAction
             component={Link}
-            to='/profile'
+            to='/dashboard'
             label='Profile'
             icon={<AccountCircleIcon />}
             value='profile'
