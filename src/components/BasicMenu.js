@@ -19,7 +19,7 @@ export default function BasicMenu() {
         <Button
         disableRipple
         onClick={openMenu}
-        sx = {{position:'fixed', paddingTop: 3, paddingRight: '14', width:'100%', justifyContent:'flex-end', color:"#1E8582"}}
+        sx = {{position:'fixed', paddingTop: '23px', paddingRight: '22px', width:'100%', justifyContent:'flex-end', color:"#1E8582"}}
         >
             <MenuRoundedIcon style={{fontSize:'2rem'}} />
 
