@@ -2,7 +2,7 @@ import * as React from 'react';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import MenuIcon from '@mui/icons-material/Menu';
+import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
 
 export default function BasicMenu() {
     const [anchorEl, setAnchorEl]=React.useState(null)
@@ -21,7 +21,7 @@ export default function BasicMenu() {
         onClick={openMenu}
         sx = {{position:'fixed', paddingTop: 3, paddingRight: '14', width:'100%', justifyContent:'flex-end', color:"#1E8582"}}
         >
-            <MenuIcon style={{fontSize:'2rem'}} />
+            <MenuRoundedIcon style={{fontSize:'2rem'}} />
 
         </Button>
         <Menu
