@@ -14,7 +14,7 @@ export const BottomNav = () => {
       setValue(newValue);
     };
     return (
-      <Paper sx={{ width:"100%" , position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
+      <Paper sx={{ width:"100%" , position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={0}>
               
         <BottomNavigation
            value={value}
