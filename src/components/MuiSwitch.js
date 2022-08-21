@@ -136,7 +136,7 @@ export default function CustomizedSwitches() {
     const setDisabledFunc = () => {
       let now = new Date()
       let def = String(Math.round((now - ToggledTime) / 60000))
-      if(def<0){
+      if(def<10){
         setDisabled(true);
       }else {
         setDisabled(false);
