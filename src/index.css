@@ -1,7 +1,9 @@
 
 main{
     min-height: 100vh;
-    background:#F5F5F5;}
+    background:#F5F5F5;
+    
+}
 
 .lock{
     margin-top: 12px;

@@ -10,6 +10,7 @@ import CustomizedSwitches, { BasicSwitch } from '../components/MuiSwitch';
 import ProfileCard from '../components/ProfileCard';
 import { Typography } from '@mui/material';
 import BasicMenu from '../components/BasicMenu';
+import { MuiDrawer } from '../components/MuiDrawer';
 
 function DashboardScreen() {
 const style = {
@@ -19,12 +20,14 @@ const style = {
   
 }
 const cardStyle ={
-  height:'270px'
+  height:'314px',
+  backgroundColor:'#FFFFFF'
 }
 
   return (
       <Container>  
-        <BasicMenu />   
+        {/* <BasicMenu />    */}
+        <MuiDrawer />
         <Row style={cardStyle}>
             <Col className="my-5  text-center justify-content-center">     
                 <ProfileCard />
@@ -36,7 +39,7 @@ const cardStyle ={
         <Col className="my-5 py-5 text-center">
             <CustomizedSwitches
              />
-             <Typography variant='body' sx={{color:'#1E8582', fontWeight:500}}>Toggle your mood</Typography>
+             <Typography variant='body1' sx={{color:'#1E8582'}}>Toggle your mood</Typography>
         </Col>
         
         </Row>

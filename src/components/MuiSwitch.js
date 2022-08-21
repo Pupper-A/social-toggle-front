@@ -7,7 +7,6 @@ import { styled } from '@mui/material/styles';
 import { Box } from '@mui/system';
 import { sendToggle } from '../actions/toggleActions';
 import { useNavigate } from 'react-router-dom';
-import axios from "axios";
 import { Typography } from '@mui/material';
 
 
@@ -15,22 +14,34 @@ import { Typography } from '@mui/material';
 
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   width: 107.86,
-  height: 60,
-  padding: 7,
+  height: 44.41,
+  padding: 9,
+  overflow:'visible',
   '& .MuiSwitch-switchBase': {
     color: '#340546',
-    margin: 5,
+    margin: 0,
     padding: 0,
-    transform: 'translateX(0px)',
+    transform: 'translateX(-15px)',
+    transition: '0.3s ease-in-out',
     '&.Mui-checked': {
       color: '#F76E09',
-      transform: 'translateX(49px)',
+      transform: 'translateX(62px)',
+      transition: '0.3s ease-in-out',
+
     },
   },
-  '& .MuiSwitch-thumb': {
-    width: 50,
-    height: 50,
+    '& .MuiSwitch-thumb': {
+    width: 63.45,
+    height: 63.45,
+    
+        
   },
+  '& .MuiSwitch-input': {
+    width: 186,
+    height: 121,
+    
+  },
+
   '& .css-ars20s-MuiButtonBase-root-MuiSwitch-switchBase.Mui-disabled': {
     color: '#340546'
   },
@@ -39,12 +50,14 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   },
   '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
     backgroundColor: '#F76E09',
-    borderRadius: 100 / 2,
+    borderRadius: 31.7241,
   },
   '& .MuiSwitch-track': {
     backgroundColor: '#340546',
-    borderRadius: 100 / 2,
+    borderRadius: 31.7241,
+    height:44.41,
   },
+
 
 }));
 
@@ -57,10 +70,6 @@ export default function CustomizedSwitches() {
   const dispatch = useDispatch();
   const history = useNavigate();
   
-  //DISABLES TOGGLE FOR 10 Minutes//
-
-
-
 //We can get the data forwarded from post request action with state from our store
   const userToggle = useSelector(state => state.toggle);
 
@@ -127,7 +136,7 @@ export default function CustomizedSwitches() {
     const setDisabledFunc = () => {
       let now = new Date()
       let def = String(Math.round((now - ToggledTime) / 60000))
-      if(def<10){
+      if(def<0){
         setDisabled(true);
       }else {
         setDisabled(false);
@@ -166,7 +175,7 @@ export default function CustomizedSwitches() {
 
 
   return (
-    <Box>
+    <>
       <Typography variant='body1'>
         {isToggled ? <span >You are Happy</span> : <span>You are Sad</span>}
       </Typography>
@@ -176,16 +185,16 @@ export default function CustomizedSwitches() {
         checked={isToggled}
         onClick={onToggle}
         disabled={disabled}
-        sx={{ justifyContent: 'center' }} />
-      <p>
+        sx={{ justifyContent: 'center', margin:'38px' }} />
+      {/* <p> */}
         {/* {seconds} seconds */}
         <br />
-        <p>{date && (date < 60 ? date + " Minutes" : Math.round(date / 60) + " Hours")}</p>
+        {/* <p>{date && (date < 60 ? date + " Minutes" : Math.round(date / 60) + " Hours")}</p> */}
 
-      </p>
+      {/* </p> */}
 
 
-    </Box>
+    </>
   );
 }
 

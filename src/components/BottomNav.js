@@ -42,7 +42,6 @@ export const BottomNav = () => {
             <BottomNavigationAction
             component={Link}
             to='/dashboard'
-            label='Feed'
             icon={<PeopleIcon />}
             value='feed'
             />
@@ -50,7 +49,6 @@ export const BottomNav = () => {
             <BottomNavigationAction
             component={Link}
             to='/stats'
-            label='Chart'
             icon={<PieChartIcon />}
             value='chart'
             />
@@ -64,7 +62,6 @@ export const BottomNav = () => {
              <BottomNavigationAction
             component={Link}
             to='/dashboard'
-            label='Profile'
             icon={<AccountCircleIcon />}
             value='profile'
             

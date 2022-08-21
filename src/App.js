@@ -17,6 +17,7 @@ import icon from './toggle-on-solid.png';
 import axios from 'axios';
 import { BottomNav } from './components/BottomNav';
 import CssBaseline from '@mui/material/CssBaseline';
+import StatsScreen1 from './screens/StatsScreen1';
 
 
 
@@ -37,7 +38,7 @@ function App() {
                     <Route path="/signup" element={<SignupScreen />} exact />
                     <Route path="/dashboard" element={<DashboardScreen />} exact />
                     <Route path="/new-user" element={<NewUserScreen />} exact />
-                    <Route path="/stats" element={<StatsScreen />} exact />
+                    <Route path="/stats" element={<StatsScreen1 />} exact />
                     <Route path="/people" element={<FindPeople />} exact />
                     <Route path="/profile" element={<ProfileScreen />} exact />
 
