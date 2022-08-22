@@ -10,7 +10,7 @@ import { Box } from '@mui/system';
 
 const ProfileCard = () => {
   return (
-    <Box>
+    <>
         <div className='profile'>
             <Avatar
             sx={{
@@ -28,12 +28,12 @@ const ProfileCard = () => {
                 }} />
             </Avatar>
             <div className='subtitle'>
-                <Typography variant='avatarLetter' fontSize={20}>Neverhood</Typography>
+                <Typography variant='avatarLetter' fontSize='20px'>Neverhood</Typography>
                 <Box className='follow'>
-                        <Typography variant="subtitle2"  fontSize={14}  component="div">
+                        <Typography variant="subtitle2"  fontSize='14px'  component="div">
                             60 Following
                         </Typography>
-                        <Typography variant="subtitle2" fontSize={14} component="div">
+                        <Typography variant="subtitle2" fontSize='14px'  component="div">
                             2 Followers
                         </Typography>
                 </Box>
@@ -41,7 +41,7 @@ const ProfileCard = () => {
 
             
             <Button className='mui-btn' variant='contained' 
-                sx={{ borderRadius: 50, backgroundColor:'#1E8582', textTransform: 'none', margin:'16px'
+                sx={{ borderRadius: 30, backgroundColor:'#1E8582', margin:'16px'
                 ,
                 '&:hover':{
                   backgroundColor:'#1E8582'
@@ -51,7 +51,7 @@ const ProfileCard = () => {
             </Button>
                       
         </div>
-    </Box>
+    </>
   )
 }
 

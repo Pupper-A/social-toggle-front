@@ -32,7 +32,7 @@ export const MuiDrawer = () => {
           onClick={()=> setIsDrawerOpen(false)}
           onKeyDown={()=> setIsDrawerOpen(false)}
         >
-          <List
+          <List sx={{paddingBottom:57}}
           subheader={
             <ListSubheader style={boxStyle} component="div" id="nested-list-subheader">
                 Contact Us

@@ -21,6 +21,7 @@ export const BottomNav = () => {
            onChange={handleChange}
            position='fixed'
            zIndex="1100"
+           
            sx={{
             "& .Mui-selected, .Mui-selected > svg": {
               color: "#1E8582",
@@ -40,6 +41,7 @@ export const BottomNav = () => {
            
           > 
             <BottomNavigationAction
+            disableRipple
             component={Link}
             to='/dashboard'
             icon={<PeopleIcon />}
@@ -47,6 +49,7 @@ export const BottomNav = () => {
             />
             
             <BottomNavigationAction
+            disableRipple
             component={Link}
             to='/stats'
             icon={<PieChartIcon />}
@@ -60,6 +63,7 @@ export const BottomNav = () => {
             value='explore'
              /> */}
              <BottomNavigationAction
+             disableRipple
             component={Link}
             to='/dashboard'
             icon={<AccountCircleIcon />}

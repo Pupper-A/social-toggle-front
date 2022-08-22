@@ -4,7 +4,6 @@ import { useEffect } from 'react';
 import Switch from '@mui/material/Switch';
 import { useDispatch, useSelector } from 'react-redux';
 import { styled } from '@mui/material/styles';
-import { Box } from '@mui/system';
 import { sendToggle } from '../actions/toggleActions';
 import { useNavigate } from 'react-router-dom';
 import { Typography } from '@mui/material';
@@ -13,33 +12,30 @@ import { Typography } from '@mui/material';
 
 
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
-  width: 107.86,
-  height: 44.41,
-  padding: 9,
-  overflow:'visible',
+  width: 130.86,
+  height: 70,
+  padding: 12.7,
+  margin:'20px',
+  // overflow:'visible',
   '& .MuiSwitch-switchBase': {
     color: '#340546',
     margin: 0,
-    padding: 0,
-    transform: 'translateX(-15px)',
-    transition: '0.3s ease-in-out',
+    padding: 3,
+    transform: 'translateX(0px)',
+    transition: '.3s cubic-bezier(0.42, 0, 0.21, 1.3)',
     '&.Mui-checked': {
       color: '#F76E09',
-      transform: 'translateX(62px)',
-      transition: '0.3s ease-in-out',
+      transform: 'translateX(61px)',
+      transition: '.3s cubic-bezier(0.42, 0, 0.21, 1.3)',
 
     },
   },
     '& .MuiSwitch-thumb': {
     width: 63.45,
     height: 63.45,
-    
-        
-  },
-  '& .MuiSwitch-input': {
-    width: 186,
-    height: 121,
-    
+
+    boxShadow:'0px 3px 3px 1px rgba(0, 0, 0, 0.2), 0px 2px 2px rgba(0, 0, 0, 0.14), 0px 1px 5px rgba(0, 0, 0, 0.12)'
+ 
   },
 
   '& .css-ars20s-MuiButtonBase-root-MuiSwitch-switchBase.Mui-disabled': {
@@ -55,13 +51,14 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   '& .MuiSwitch-track': {
     backgroundColor: '#340546',
     borderRadius: 31.7241,
-    height:44.41,
+    height:44,
   },
 
 
 }));
 
-export default function CustomizedSwitches() {
+export default function ToggleSwitch() {
+
   const [isToggled, setIsToggled] = useState("");
   const [disabled, setDisabled] = useState(null);
   const [date, setDate] = useState('')
@@ -78,10 +75,7 @@ export default function CustomizedSwitches() {
 
   let token = null;
   let redirect = "";
-
-
-
-
+  
   //TOGGLES THE SWITCH AND RESETS TIME ON EVERY TOGGLE
   const onToggle = () => {
 
@@ -95,8 +89,6 @@ export default function CustomizedSwitches() {
     const userId = JSON.parse(localStorage.getItem("userInfo")).id
     dispatch(sendToggle(userId, bool))
   }
-
-
 
   useEffect(() => {
     const userInfo = localStorage.getItem("userInfo")
@@ -136,7 +128,7 @@ export default function CustomizedSwitches() {
     const setDisabledFunc = () => {
       let now = new Date()
       let def = String(Math.round((now - ToggledTime) / 60000))
-      if(def<10){
+      if(def<0){
         setDisabled(true);
       }else {
         setDisabled(false);
@@ -185,7 +177,7 @@ export default function CustomizedSwitches() {
         checked={isToggled}
         onClick={onToggle}
         disabled={disabled}
-        sx={{ justifyContent: 'center', margin:'38px' }} />
+        sx={{ justifyContent: 'center' }} />
       {/* <p> */}
         {/* {seconds} seconds */}
         <br />
