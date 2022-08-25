@@ -12,7 +12,6 @@ function Header() {
 
     const logoutHandler = () => {
       dispatch(logout())
-      window.location.reload()
     }
 
     return (
@@ -29,22 +28,13 @@ function Header() {
                 <Nav className="me-auto">
 
                   {userInfo ? (
-                    <>
-                      {userInfo.is_private ? <i class="fa-solid fa-lock lock"></i> : <i class="fa-solid fa-lock-open lock"></i>}
-                      <NavDropdown title={userInfo.username} id="username">
-                        <LinkContainer to="/profile">
-                          <NavDropdown.Item>Profile</NavDropdown.Item>
-                        </LinkContainer>
-                        <NavDropdown.Item onClick={logoutHandler}>Logout</NavDropdown.Item>
-                      </NavDropdown>
-                      <LinkContainer to="/stats">
-                        <Nav.Link><i className="fa fa-line-chart" aria-hidden="true"></i>Stats</Nav.Link>
+
+                    <NavDropdown title={userInfo.username} id="username">
+                      <LinkContainer to="/profile">
+                        <NavDropdown.Item>Profile</NavDropdown.Item>
                       </LinkContainer>
-                      <LinkContainer to="/people">
-                        <Nav.Link>Find People</Nav.Link>
-                      </LinkContainer>
-                    </>
-                    
+                      <NavDropdown.Item onClick={logoutHandler}>Logout</NavDropdown.Item>
+                    </NavDropdown>
 
                   ) : (
                     
