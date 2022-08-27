@@ -32,10 +32,10 @@ export const BottomNav = () => {
               color:'black',
               width:"100%"
             },
-            '& .Mui-selected':{
-              color: "#1E8582",
-
-            }
+            
+            '& .MuiBottomNavigationAction-root.Mui-selected':{
+              color:'#1E8582'
+            },
         }}
   
            
@@ -43,7 +43,7 @@ export const BottomNav = () => {
             <BottomNavigationAction
             disableRipple
             component={Link}
-            to='/dashboard'
+            to='/people'
             icon={<PeopleIcon />}
             value='feed'
             />

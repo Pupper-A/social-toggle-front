@@ -1,22 +1,16 @@
-import React, {useState, useEffect} from 'react';
-import { useNavigate } from 'react-router-dom';
+import React from 'react';
 import { Row, Col, Alert, Container } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
-import Loader from '../components/Loader';
-import BootstrapSwitchButton from 'bootstrap-switch-button-react';
-import { sendToggle } from '../actions/toggleActions';
-import axios from "axios";
 import CustomizedSwitches, { BasicSwitch } from '../components/MuiSwitch';
 import ProfileCard from '../components/ProfileCard';
 import { Typography } from '@mui/material';
-import BasicMenu from '../components/BasicMenu';
 import { MuiDrawer } from '../components/MuiDrawer';
+import { BottomNav } from '../components/BottomNav';
 
 function DashboardScreen() {
 const style = {
   backgroundColor:'#F5F5F5',
-  height:'430px',
-  marginTop: '45px'
+  // height:'430px',
+  marginTop: '54px'
   
 }
 const cardStyle ={
@@ -26,10 +20,12 @@ const cardStyle ={
 
   return (
       <Container>  
-        {/* <BasicMenu />    */}
+        
         <MuiDrawer />
         <Row style={cardStyle}>
-            <Col className="my-5  text-center justify-content-center">     
+            <Col className="text-center justify-content-center"
+            style={{marginTop:'73px',
+            }}>     
                 <ProfileCard />
             </Col>
         </Row>
@@ -43,7 +39,7 @@ const cardStyle ={
         </Col>
         
         </Row>
-       
+       <BottomNav />
       </Container>
       
   )

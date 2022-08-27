@@ -16,7 +16,6 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   height: 70,
   padding: 12.7,
   margin:'20px',
-  // overflow:'visible',
   '& .MuiSwitch-switchBase': {
     color: '#340546',
     margin: 0,
@@ -27,27 +26,28 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
       color: '#F76E09',
       transform: 'translateX(61px)',
       transition: '.3s cubic-bezier(0.42, 0, 0.21, 1.3)',
+      '& .Mui-disabled': {
+        color: '#F76E09'
+      },
 
     },
+    '& .Mui-disabled': {
+      color: '#340546'
+    },
+    
+    '& .Mui-checked + .MuiSwitch-track': {
+      backgroundColor: '#F76E09',
+      borderRadius: 31.7241,
+    },
   },
-    '& .MuiSwitch-thumb': {
+  '& .MuiSwitch-thumb': {
     width: 63.45,
     height: 63.45,
 
     boxShadow:'0px 3px 3px 1px rgba(0, 0, 0, 0.2), 0px 2px 2px rgba(0, 0, 0, 0.14), 0px 1px 5px rgba(0, 0, 0, 0.12)'
  
   },
-
-  '& .css-ars20s-MuiButtonBase-root-MuiSwitch-switchBase.Mui-disabled': {
-    color: '#340546'
-  },
-  '& .css-ars20s-MuiButtonBase-root-MuiSwitch-switchBase.Mui-checked.Mui-disabled': {
-    color: '#F76E09'
-  },
-  '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
-    backgroundColor: '#F76E09',
-    borderRadius: 31.7241,
-  },
+ 
   '& .MuiSwitch-track': {
     backgroundColor: '#340546',
     borderRadius: 31.7241,
@@ -128,7 +128,7 @@ export default function ToggleSwitch() {
     const setDisabledFunc = () => {
       let now = new Date()
       let def = String(Math.round((now - ToggledTime) / 60000))
-      if(def<10){
+      if(def<0){
         setDisabled(true);
       }else {
         setDisabled(false);

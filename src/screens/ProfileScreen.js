@@ -160,7 +160,7 @@ function ProfileScreen() {
                     <Form.Label>Avatar</Form.Label>
                     <Form.Control
                         type = "file"
-                        onChange={(e) => {handleImageChange(e);}}
+                        onChange={handleImageChange}
                     >
                     </Form.Control>
                 </Form.Group>

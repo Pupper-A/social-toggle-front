@@ -109,7 +109,7 @@ export const MuiDrawer = () => {
         sx = {{position:'fixed', paddingTop: '23px', justifyContent:'flex-end', color:"#1E8582"}}
         onClick={()=> setIsDrawerOpen(true)}
         >
-            <MenuRoundedIcon style={{fontSize:'2rem'}} />
+            <MenuRoundedIcon style={{fontSize:'2rem',  width:'36px',height:'36px'}} />
 
         </IconButton>
         <SwipeableDrawer

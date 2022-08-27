@@ -6,8 +6,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import Loader from '../components/Loader';
 import { people } from '../actions/peopleActions';
 import { followRequest, getFollow } from '../actions/followActions';
+import SearchIcon from '@mui/icons-material/Search';
+import MenuIcon from '@mui/icons-material/Menu';
 
 import axios from 'axios';
+import { BottomNav } from '../components/BottomNav';
+import { AppBar, InputBase } from '@material-ui/core';
+import Search from '@mui/icons-material/Search';
+import { IconButton } from '@mui/material';
 
 function FindPeople() {
 
@@ -80,6 +86,7 @@ function FindPeople() {
         }
     }
     
+    
   return (
       
       <Container>
@@ -92,11 +99,12 @@ function FindPeople() {
             }
         <Row>
             <Col></Col>
-                <MDBCol md="6">
+            
+                {/* <MDBCol md="6">
                     <div className="active-pink-3 active-pink-4 mb-4">
                         <input onChange={(e) => OnChangeHandler(e)} className="form-control" type="text" placeholder="Search" aria-label="Search" />
                     </div>
-                </MDBCol>
+                </MDBCol> */}
             
             <Col></Col>
         </Row>
@@ -148,6 +156,8 @@ function FindPeople() {
                 </Row>
             )
         })}
+        <BottomNav />
+
     </Container>
   )
 }
