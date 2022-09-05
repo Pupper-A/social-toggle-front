@@ -19,7 +19,7 @@ const cardStyle ={
 }
 
   return (
-      <Container>  
+      <Container style={{maxWidth:505}}>  
         
         <MuiDrawer />
         <Row style={cardStyle}>

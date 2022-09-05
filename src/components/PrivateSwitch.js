@@ -11,10 +11,6 @@ import { profile } from '../actions/profileActions';
 
 
 
-
-
-
-
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
     width: 104,
     height: 62,

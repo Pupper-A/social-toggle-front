@@ -8,7 +8,7 @@ import LoginScreen from './screens/LoginScreen1';
 import SignupScreen from './screens/SignupScreen1';
 import DashboardScreen from './screens/DashboardScreen';
 import NewUserScreen from './screens/NewUserScreen';
-import FindPeople from './screens/FindPeople';
+import FindPeople from './screens/FindPeople1';
 import ProfileScreen1 from './screens/ProfileScreen1';
 import { useEffect } from 'react';
 // import '@fontsource/roboto/300.css';

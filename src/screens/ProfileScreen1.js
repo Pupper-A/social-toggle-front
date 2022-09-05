@@ -162,7 +162,7 @@ const ProfileScreen1 = () => {
     }
 
     return (
-        <Container>
+        <Container style={{maxWidth:505, margin:'0 auto'}}>
             <Dialog open={open} onClose={() => setOpen(false)}>
                 <DialogTitle>
                     <Grid container justify="space-between" alignItems="center">

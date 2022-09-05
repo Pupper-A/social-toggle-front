@@ -112,7 +112,7 @@ const StatsScreen = () => {
 
     const cardStyle = {
         borderRadius: 16,
-        marginTop: 32,
+        marginTop: 16,
         marginRight: 20,
         marginLeft: 20,
         display: 'flex',
@@ -131,7 +131,7 @@ const StatsScreen = () => {
 
     return (
 
-        <div>
+        <div style={{maxWidth:505, margin:'0 auto'}}>
             <Row className='text-center'>
             </Row>
 
