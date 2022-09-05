@@ -4,24 +4,26 @@
     align-items: center;
     padding: 0px;
     gap: 5px;
-    
+
     width: 157px;
     height: 117.5px;
     left: 102px;
     top: 73px;
 }
+
 .edit-profile {
     display: inline-flex;
     flex-direction: column;
     align-items: center;
     padding: 0px;
     gap: 16px;
-    
+
     width: 157px;
     height: 117.5px;
     left: 102px;
     top: 73px;
 }
+
 .subtitle {
     display: flex;
     flex-direction: column;
@@ -45,10 +47,9 @@
 .mui-btn {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;    
+    align-items: flex-start;
     gap: 8px;
-    
-    width: 124px;
+    width: 133px;
     height: 36px;
 }
 
@@ -60,4 +61,49 @@
     padding: 6px 16px;
 
     height: 36px;
+}
+
+.home-btns {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    padding-bottom: 9.5vh;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 43px;
+    gap: 16px;
+    margin-top: 136px;
+    margin-bottom: 60px;
+}
+
+.signup-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 43px;
+    gap: 16px;
+    margin-top: 92px;
+    margin-bottom: 60px;
+}
+
+.signup-form button {
+    margin-top: 24px;
+}
+
+.privateBtn {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    left: 116px;
+    right: 115px;
+    width: 150px;
+    height: 108.14px;
 }

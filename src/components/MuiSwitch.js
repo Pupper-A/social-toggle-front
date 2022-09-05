@@ -15,7 +15,7 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   width: 130.86,
   height: 70,
   padding: 12.7,
-  margin:'20px',
+  margin: '20px',
   '& .MuiSwitch-switchBase': {
     color: '#340546',
     margin: 0,
@@ -34,7 +34,7 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
     '& .Mui-disabled': {
       color: '#340546'
     },
-    
+
     '& .Mui-checked + .MuiSwitch-track': {
       backgroundColor: '#F76E09',
       borderRadius: 31.7241,
@@ -44,14 +44,14 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
     width: 63.45,
     height: 63.45,
 
-    boxShadow:'0px 3px 3px 1px rgba(0, 0, 0, 0.2), 0px 2px 2px rgba(0, 0, 0, 0.14), 0px 1px 5px rgba(0, 0, 0, 0.12)'
- 
+    boxShadow: '0px 3px 3px 1px rgba(0, 0, 0, 0.2), 0px 2px 2px rgba(0, 0, 0, 0.14), 0px 1px 5px rgba(0, 0, 0, 0.12)'
+
   },
- 
+
   '& .MuiSwitch-track': {
     backgroundColor: '#340546',
     borderRadius: 31.7241,
-    height:44,
+    height: 44,
   },
 
 
@@ -66,16 +66,16 @@ export default function ToggleSwitch() {
 
   const dispatch = useDispatch();
   const history = useNavigate();
-  
-//We can get the data forwarded from post request action with state from our store
+
+  //We can get the data forwarded from post request action with state from our store
   const userToggle = useSelector(state => state.toggle);
 
-//Then store data infomations tin variables
-  const {error, loading, toggleInfo} = userToggle
+  //Then store data infomations tin variables
+  const { error, loading, toggleInfo } = userToggle
 
   let token = null;
   let redirect = "";
-  
+
   //TOGGLES THE SWITCH AND RESETS TIME ON EVERY TOGGLE
   const onToggle = () => {
 
@@ -101,18 +101,18 @@ export default function ToggleSwitch() {
     }
     let ToggledTime = null
 
-  //Because we stored toggled data in localStorage
-  //we check the data exists in localStorage or not
-    if(localStorage.getItem("toggleInfo")){
+    //Because we stored toggled data in localStorage
+    //we check the data exists in localStorage or not
+    if (localStorage.getItem("toggleInfo")) {
 
-    //Then we create a date object from localStore info
+      //Then we create a date object from localStore info
       let toggleInfo = JSON.parse(localStorage.getItem("toggleInfo"))
       ToggledTime = new Date(toggleInfo.toggled_time)
-      
+
       //We check if there is no error and loading isn't
       //true from posting our request we get toggled info
       //and store it in isToggled state
-      if( !error && loading != true ){
+      if (!error && loading != true) {
         setIsToggled(toggleInfo.is_toggled)
       }
     }
@@ -120,7 +120,7 @@ export default function ToggleSwitch() {
     //Else we check if toggled data isn't in localStorage
     //We redirect user to homeScreen
     //(read comments from this file and then read comments in HomeSceen file)
-    else{
+    else {
       redirect = "/"
       history(redirect)
     }
@@ -128,27 +128,27 @@ export default function ToggleSwitch() {
     const setDisabledFunc = () => {
       let now = new Date()
       let def = String(Math.round((now - ToggledTime) / 60000))
-      if(def<0){
+      if (def < 0) {
         setDisabled(true);
-      }else {
+      } else {
         setDisabled(false);
       }
-    } 
+    }
     setDisabledFunc()
 
     // function that store the time between two mood
     const setDateFunc = () => {
       let now = new Date()
       let def = String(Math.round((now - ToggledTime) / 60000))
-      
+
       setDate(def)
-     
+
     }
-    
+
     //call that function 
     setDateFunc()
-    
-    
+
+
     //every 1 minute this update our time with help of setDateFunc
     let interval = setInterval(() => {
       setDateFunc()
@@ -168,9 +168,9 @@ export default function ToggleSwitch() {
 
   return (
     <>
-      <Typography variant='body1'>
+      {/* <Typography variant='body1'>
         {isToggled ? <span >You are Happy</span> : <span>You are Sad</span>}
-      </Typography>
+      </Typography> */}
       <MaterialUISwitch
         id='buttonid'
         defaultChecked color="warning"
@@ -179,9 +179,9 @@ export default function ToggleSwitch() {
         disabled={disabled}
         sx={{ justifyContent: 'center' }} />
       {/* <p> */}
-        {/* {seconds} seconds */}
-        <br />
-        {/* <p>{date && (date < 60 ? date + " Minutes" : Math.round(date / 60) + " Hours")}</p> */}
+      {/* {seconds} seconds */}
+      <br />
+      {/* <p>{date && (date < 60 ? date + " Minutes" : Math.round(date / 60) + " Hours")}</p> */}
 
       {/* </p> */}
 

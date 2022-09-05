@@ -17,10 +17,21 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import PersonIcon from '@mui/icons-material/Person';
 import DeleteIcon from '@mui/icons-material/Delete';
 import {ReactComponent as PupperIcon} from '../PupperIcon.svg';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '../actions/userActions';
 
 
 export const MuiDrawer = () => {
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+    const userLogin = useSelector(state => state.userLogin)
+    const {userInfo} = userLogin
+
+    const dispatch = useDispatch()
+
+    const logoutHandler = () => {
+      dispatch(logout())
+      window.location.reload()
+    }
 
     const boxStyle = {
         paddingLeft:'16px',
@@ -83,7 +94,9 @@ export const MuiDrawer = () => {
                    style={{fill:'#1B1B1B'}}
                    />
                   </ListItemIcon>
-                  <ListItemText primary='Sign out' />
+                  <ListItemText primary='Sign out'
+                  onClick={logoutHandler}
+                   />
                 </ListItemButton>
             </ListItem>
             <ListItem disablePadding>

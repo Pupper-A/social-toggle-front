@@ -1,91 +1,120 @@
+import { Button, CssBaseline, TextField, Typography } from '@mui/material';
+import React, {useState, useEffect} from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { Row, Col, Alert } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import greenUp from '../images/green-up.png'
 
-import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { Col } from 'react-bootstrap';
+import { login } from '../actions/userActions';
+import { Container } from '@mui/system';
 
-const LoginScreen1 = () => {
+
+const LoginScreen1 = (location) => {
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+
+  const history= useNavigate();
+  
+  const redirect = location.search ? location.search.split("=")[1] : "/"
+
+  const dispatch = useDispatch()
+
+  const userLogin = useSelector(state => state.userLogin)
+
+  const {error, loading, userInfo} = userLogin
+
+  useEffect(() => {
+      if(userInfo){
+          history(redirect)
+      }
+  }, [history, userInfo, redirect])
+
+  const submitHandler = (e) => {
+      e.preventDefault()
+      dispatch(login(username, password))
+     
+  }
+
   return (
-    <Container component="main" sx={{backgroundColor:'#FFFFFF'}}>
-        <CssBaseline />
-        <Col
-          sx={{
-            marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
+    <Container component="main" sx={{backgroundColor:'#FFFFFF',
+      display:'flex',
+      padding:0,
+      width:'100vw',
+      flexDirection:'column',
+      justifyContent:'center',
+      alignItems:'center'
+      }}>
+      <div style={{display:'flex', width:280, position:'sticky'}}>
+      <Typography variant='h4'
+      sx={{
+        marginRight:'46.11vw',
+        marginBottom:'9.62vh',
+        paddingTop:'5.87vh',
+        color:'#1E8582',
+        textTransform:'none',
+        top:47,
+        left:43
+        
+      }}>
+        Welcome Back
+      </Typography>
+      </div>
+      
+      <img src={greenUp} />
+      <form className='login-form' onSubmit={submitHandler}>
+        <TextField
+        label='Username'
+        placeholder='Username'
+        autoComplete='username'
+        type='username'
+        variant='outlined'
+        value={username}
+        onChange = {(e) => setUsername(e.target.value)}
+        sx={{width:272}}
+                >
+
+        </TextField>
+        <TextField
+        label='Password'
+        placeholder='Password'
+        autoComplete='password'
+        variant='outlined'
+        type="password"
+        value={password}
+        onChange = {(e) => setPassword(e.target.value)}
+        sx={{width:272, gap:16}}
+
         >
-            <Box
-          sx={{
-            marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        ></Box>
-          
-        <Box component="form"
-        //   onSubmit={handleSubmit}
-          noValidate sx={{ mt: 1 }}>
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
-              autoFocus
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-            />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              Sign In
-            </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href="#" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
-            </Grid>
-          </Box>
-        </Col>
+
+        </TextField>
+        <div style={{display:'flex', flexDirection:'row', width:'272px'}}>
+        <Typography variant='subtitle2' textTransform='none' sx={{padding:0}} >Forgot Password?</Typography>
+
+        </div>
+        <Button
+        type='submit'
+        variant='contained'
+        sx={{ borderRadius: 68,
+            backgroundColor:'#1E8582',
+            textTransform: "none",
+            width:'272px',
+            height:'42px',
+            '&:hover':{
+                backgroundColor:'#1E8582',
+                color:'#FFFFFF',
+                boxShadow:'0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px rgba(0, 0, 0, 0.14), 0px 1px 5px rgba(0, 0, 0, 0.12)'
+                
+              }}}
+              > Login
+              </Button>
+      </form>
+      <div style={{display:'flex', flexDirection:'row', gap:5, paddingBottom:66}}>
+        <Typography variant='subtitle2' textTransform='none'> Need an account?</Typography>
+        <Typography variant='subtitle2' textTransform='none' color='#D8295E' component={Link} to='/signup'> Sign up</Typography>
+      </div>
+      <CssBaseline />
     </Container>
+    
   )
 }
 

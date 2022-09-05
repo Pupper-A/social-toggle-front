@@ -5,7 +5,7 @@ import BasicMenu from './components/BasicMenu';
 import { HashRouter as Router, Route, Routes } from 'react-router-dom';
 import HomeScreen from './screens/HomeScreen';
 import LoginScreen from './screens/LoginScreen1';
-import SignupScreen from './screens/SignupScreen';
+import SignupScreen from './screens/SignupScreen1';
 import DashboardScreen from './screens/DashboardScreen';
 import NewUserScreen from './screens/NewUserScreen';
 import FindPeople from './screens/FindPeople';
@@ -42,9 +42,9 @@ function App() {
                     <Route path="/profile" element={<ProfileScreen1 />} exact />
 
                 </Routes>
-                
+
             </main>
-            
+
         </Router>
     )
 }

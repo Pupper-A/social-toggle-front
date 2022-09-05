@@ -8,73 +8,73 @@ import Paper from '@mui/material/Paper';
 import { Link } from 'react-router-dom';
 
 export const BottomNav = () => {
-    const [value, setValue] = React.useState('Profile');
+  const [value, setValue] = React.useState('Profile');
 
-    const handleChange = (event, newValue) => {
-      setValue(newValue);
-    };
-    return (
-      <Paper sx={{ width:"100%" , position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={0}>
-              
-        <BottomNavigation
-           value={value}
-           onChange={handleChange}
-           position='fixed'
-           zIndex="1100"
-           
-           sx={{
-            "& .Mui-selected, .Mui-selected > svg": {
-              color: "#1E8582",
-              
-            },
-            "& .MuiBottomNavigationAction-root": {
-              backgroundColor: "#F0F0F0",
-              color:'black',
-              width:"100%"
-            },
-            
-            '& .MuiBottomNavigationAction-root.Mui-selected':{
-              color:'#1E8582'
-            },
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+  return (
+    <Paper sx={{ width: "100%", position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={0}>
+
+      <BottomNavigation
+        value={value}
+        onChange={handleChange}
+        position='fixed'
+        zIndex="1100"
+
+        sx={{
+          "& .Mui-selected, .Mui-selected > svg": {
+            color: "#1E8582",
+
+          },
+          "& .MuiBottomNavigationAction-root": {
+            backgroundColor: "#F0F0F0",
+            color: 'black',
+            width: "100%"
+          },
+
+          '& .MuiBottomNavigationAction-root.Mui-selected': {
+            color: '#1E8582'
+          },
         }}
-  
-           
-          > 
-            <BottomNavigationAction
-            disableRipple
-            component={Link}
-            to='/people'
-            icon={<PeopleIcon />}
-            value='feed'
-            />
-            
-            <BottomNavigationAction
-            disableRipple
-            component={Link}
-            to='/stats'
-            icon={<PieChartIcon />}
-            value='chart'
-            />
-            {/* <BottomNavigationAction
+
+
+      >
+        <BottomNavigationAction
+          disableRipple
+          component={Link}
+          to='/people'
+          icon={<PeopleIcon />}
+          value='people'
+        />
+
+        <BottomNavigationAction
+          disableRipple
+          component={Link}
+          to='/stats'
+          icon={<PieChartIcon />}
+          value='chart'
+        />
+        {/* <BottomNavigationAction
             component={Link}
             to='/people'
             label='Explore'
             icon={<SearchIcon />}
             value='explore'
              /> */}
-             <BottomNavigationAction
-             disableRipple
-            component={Link}
-            to='/dashboard'
-            icon={<AccountCircleIcon />}
-            value='profile'
-            
-             />
-          
-        </BottomNavigation>
-              
-              
-          
-      </Paper>
-    )
+        <BottomNavigationAction
+          disableRipple
+          component={Link}
+          to='/dashboard'
+          icon={<AccountCircleIcon />}
+          value='profile'
+
+        />
+
+      </BottomNavigation>
+
+
+
+    </Paper>
+  )
 }
