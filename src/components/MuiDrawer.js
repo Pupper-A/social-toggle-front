@@ -1,4 +1,4 @@
-import { Drawer, Box, Typography, IconButton, SvgIcon } from '@mui/material';
+import { Drawer, Box, Typography, IconButton, SvgIcon, Link } from '@mui/material';
 import * as React from 'react';
 import Button from '@mui/material/Button';
 import List from '@mui/material/List';
@@ -56,15 +56,15 @@ export const MuiDrawer = () => {
             </ListSubheader>
           } >
             <ListItem disablePadding>
-              <ListItemButton>
+              <ListItemButton component={Link} to='https://pupper.one'>
                 <ListItemIcon>
                   <SvgIcon component={PupperIcon} inheritViewBox />
                 </ListItemIcon>
-                <ListItemText primary='Pupper' />
+                <ListItemText primary='Pupper'/>
               </ListItemButton>
             </ListItem>
             <ListItem disablePadding>
-              <ListItemButton>
+              <ListItemButton component={Link} to='https://linkedin.com/company/pupper/'>
                 <ListItemIcon>
                   <LinkedInIcon
                     style={{fill:'#1E8582'}}

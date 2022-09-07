@@ -1,10 +1,10 @@
-import { Button, CssBaseline, TextField, Typography } from '@mui/material';
+import { Button, CssBaseline, Snackbar, TextField, Typography } from '@mui/material';
 import React, {useState, useEffect} from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Row, Col, Alert } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import greenUp from '../images/green-up.png'
-
+import Alert from '@mui/material/Alert';
 import { login } from '../actions/userActions';
 import { Container } from '@mui/system';
 
@@ -12,6 +12,7 @@ import { Container } from '@mui/system';
 const LoginScreen1 = (location) => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const [message, setMessage] = useState('')
 
   const history= useNavigate();
   
@@ -32,6 +33,7 @@ const LoginScreen1 = (location) => {
   const submitHandler = (e) => {
       e.preventDefault()
       dispatch(login(username, password))
+        
      
   }
 
@@ -42,7 +44,8 @@ const LoginScreen1 = (location) => {
       width:'100vw',
       flexDirection:'column',
       justifyContent:'center',
-      alignItems:'center'
+      alignItems:'center',
+      maxWidth:505
       }}>
       <div style={{display:'flex', width:280, position:'sticky'}}>
       <Typography variant='h4'
@@ -62,6 +65,12 @@ const LoginScreen1 = (location) => {
       
       <img src={greenUp} />
       <form className='login-form' onSubmit={submitHandler}>
+      {error && <Snackbar
+              sx={{width:272, display:'flex', justifyContent:'center'}}
+              open={submitHandler}
+              autoHideDuration={5000}
+              message={error}
+              ></Snackbar>}
         <TextField
         label='Username'
         placeholder='Username'
@@ -88,7 +97,7 @@ const LoginScreen1 = (location) => {
 
         </TextField>
         <div style={{display:'flex', flexDirection:'row', width:'272px'}}>
-        <Typography variant='subtitle2' textTransform='none' sx={{padding:0}} >Forgot Password?</Typography>
+        <Typography variant='subtitle2' textTransform='none' sx={{padding:0}}>Forgot Password?</Typography>
 
         </div>
         <Button

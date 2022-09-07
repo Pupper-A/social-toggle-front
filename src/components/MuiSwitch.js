@@ -177,7 +177,7 @@ export default function ToggleSwitch() {
         checked={isToggled}
         onClick={onToggle}
         disabled={disabled}
-        sx={{ justifyContent: 'center' }} />
+        sx={{ justifyContent: 'center', margin:'30px' }} />
       {/* <p> */}
       {/* {seconds} seconds */}
       <br />

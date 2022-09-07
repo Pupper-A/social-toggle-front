@@ -60,6 +60,7 @@ const SignupScreen = (location) => {
             display: 'flex',
             padding: 0,
             width: '100vw',
+            maxWidth:505,
             flexDirection: 'column',
             justifyContent: 'center',
             alignItems: 'center'
@@ -68,7 +69,7 @@ const SignupScreen = (location) => {
                 <Typography variant='h4'
                     sx={{
                         marginRight: '46.11vw',
-                        marginBottom: '9.62vh',
+                        marginBottom: '9vh',
                         paddingTop: '5.87vh',
                         color: '#D8295E',
                         textTransform: 'none',

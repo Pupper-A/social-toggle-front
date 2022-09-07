@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Row, Col, Alert, Container, Image } from 'react-bootstrap';
-import { Avatar, Box, Button, CssBaseline, Dialog, IconButton, Input, InputAdornment, Switch, Typography } from '@mui/material';
+import { Avatar, Box, Button, CssBaseline, Dialog, FormControl, IconButton, Input, InputAdornment, Switch, Typography } from '@mui/material';
 import '../components/myStyles.css';
 import PersonIcon from '@mui/icons-material/Person';
 import TextField from '@mui/material/TextField';
@@ -18,7 +18,7 @@ import DialogActions from '@mui/material/DialogActions';
 import PrivateSwitch from '../components/PrivateSwitch';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-
+import InputLabel from '@mui/material/InputLabel';
 
 
 
@@ -39,12 +39,15 @@ const ProfileScreen1 = () => {
 
 
     const [open, setOpen] = React.useState();
-
-
+    const [showPassword, setShowPassword] = React.useState(false)
+    
+      const handleClickShowPassword = () => {
+       setShowPassword(!showPassword)
+      };
+    
     const history = useNavigate()
 
     const dispatch = useDispatch()
-    const showPassword = 'false'
 
     const userSelector = useSelector(state => state.profile)
 
@@ -132,16 +135,6 @@ const ProfileScreen1 = () => {
         submitHandler()
         history('/dashboard')
     };
-    const handleClickShowPassword = () => {
-
-        showPassword = !showPassword
-
-    };
-
-    const handleMouseDownPassword = (e) => {
-        e.preventDefault();
-    };
-
 
 
     const cardStyle = {
@@ -257,7 +250,7 @@ const ProfileScreen1 = () => {
                             id="name"
                             label='Name'
                             variant="standard"
-                            type="text"
+                            type="search"
                             autoComplete='name'
                             value={first_name}
                             onChange={(e) => setFirstName(e.target.value)}
@@ -270,7 +263,7 @@ const ProfileScreen1 = () => {
                             id="user_name"
                             label="Username"
                             variant="standard"
-                            type="text"
+                            type="search"
                             value={username}
                             autoComplete="username"
                             onChange={(e) => setUsername(e.target.value)}
@@ -284,35 +277,41 @@ const ProfileScreen1 = () => {
                             label="Email"
                             helperText=""
                             variant="standard"
-                            type="email"
+                            type="search"
                             value={email}
                             autoComplete="email"
                             onChange={(e) => setEmail(e.target.value)}
                             sx={{ width: '328px', paddingBottom: '23px' }}
                         />
 
-
-                        <TextField
-                            id="password"
-                            label="Password"
-                            helperText=""
+                        <FormControl
+                            sx={{ width: '328px', paddingBottom: '23px' }}
                             variant="standard"
+                            id="password"
+                            helperText=""
                             type="password"
-                            value={password}
                             autoComplete="current_password"
                             onChange={(e) => setPassword(e.target.value)}
-                            sx={{ width: '328px', paddingBottom: '23px' }}
-                            endAdornment={
+                             >
+                            <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
+                            <Input
+                                id="standard-adornment-password"
+                                type={showPassword ? 'text' : 'password'}
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                endAdornment={
                                 <InputAdornment position="end">
                                     <IconButton
-                                        aria-label="toggle password visibility"
-                                        onClick={handleClickShowPassword}
-                                        onMouseDown={handleMouseDownPassword}
+                                    aria-label="toggle password visibility"
+                                    onClick={handleClickShowPassword}
+
                                     >
-                                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                                    {showPassword ? <VisibilityOff /> : <Visibility />}
                                     </IconButton>
-                                </InputAdornment>}
-                        />
+                                </InputAdornment>
+                                }
+                            />
+                        </FormControl>
 
                     </Col>
                 </Row>
