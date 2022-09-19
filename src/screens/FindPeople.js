@@ -6,14 +6,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import Loader from '../components/Loader';
 import { people } from '../actions/peopleActions';
 import { followRequest, getFollow } from '../actions/followActions';
-import SearchIcon from '@mui/icons-material/Search';
-import MenuIcon from '@mui/icons-material/Menu';
-
 import axios from 'axios';
 import { BottomNav } from '../components/BottomNav';
-import { AppBar, InputBase } from '@material-ui/core';
-import Search from '@mui/icons-material/Search';
-import { IconButton } from '@mui/material';
+
 
 function FindPeople() {
 
@@ -72,7 +67,9 @@ function FindPeople() {
         const user_id = JSON.parse(localStorage.getItem("userInfo")).id
 
         dispatch(followRequest(user_id, id, action))
-        window.location.reload()
+        // window.location.reload()
+        console.log(following_list)
+
 
         if (action == "Follow") {
             setMessage("Followed!")

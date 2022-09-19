@@ -14,6 +14,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import { Row } from 'react-bootstrap'
 import { Col, Card, Image, Alert } from 'react-bootstrap';
+import Loader from '../components/Loader';
 
 
 
@@ -69,29 +70,18 @@ const FindPeople = () => {
     }, [])
 
     const followHandler = (id) => {
+
+
         window.scrollTo(0, 0);
-        const action = id.target.innerHTML
+        const action = id.target.innerText
         id = id.target.value
         const user_id = JSON.parse(localStorage.getItem("userInfo")).id
 
         dispatch(followRequest(user_id, id, action))
-        window.location.reload()
+        console.log(user_id, id,action)
+        // window.location.reload()
 
-        if (action == "Follow") {
-            setMessage("Followed!")
-            setVariant("success")
-        } else if (action == "Unfollow") {
-            setMessage("Unfollowed!")
-            setVariant("danger")
-        } else {
-            setMessage("Canceled Follow Request!")
-            setVariant("warning")
-        }
     }
-
-
-
-
 
  const inputWrapper = {
     backgroundColor:'#FFFFFF',
@@ -121,6 +111,24 @@ const detailStyle = {
     gap:16,
    
 }
+const followbtn = {
+    
+    position:'relative',
+    borderRadius: 30, backgroundColor: '#1E8582', boxShadow: '0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px rgba(0, 0, 0, 0.14), 0px 1px 5px rgba(0, 0, 0, 0.12)'
+    ,
+    '&:hover': {
+        backgroundColor: '#1E8582',
+        color: '#FFFFFF',
+        boxShadow: '0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px rgba(0, 0, 0, 0.14), 0px 1px 5px rgba(0, 0, 0, 0.12)'
+
+    },
+    '& .MuiButton-root': {
+        width: 'auto'
+    }
+}
+const followBtns = {
+    marginRight:'16px',
+}
 
       
   return (
@@ -142,6 +150,7 @@ const detailStyle = {
             </AppBar>
         </Box>
         <div style={{ marginTop: 20, flexDirection: 'column-reverse', display: 'flex' }}>
+        {getFollowSelector.loading && <Loader />}
         {
                 getFollowSelector.allFollowInfo ? getFollowSelector.allFollowInfo[0].map((element) => {
                     following_list.push([element.followed_user, element.status])
@@ -168,33 +177,32 @@ const detailStyle = {
                             </Col>
                         </Row>
 
-                    {/* <Row>
+                    <Row style={followBtns}>
                     {
                                         following_list.find(element => element[0] == e[0].id) ?
 
                                             (
                                                 following_list.find(element => element[1] == "pending" & element[0] == e[0].id) ?
                                                     (jsonUser.id == e[0].id ? <></> :
-                                                        <Button value={id} onClick={followHandler}
-                                                            variant="warning">Pending</Button>)
+                                                        <Button sx={followbtn}  size='medium' value={id} onClick={followHandler}
+                                                            variant="contained">Pending</Button>)
 
                                                     :
                                                     (jsonUser.id == e[0].id ? <></> :
-                                                        <Button value={id} onClick={followHandler}
-                                                            variant="danger">Unfollow</Button>)
+                                                        <Button sx={followbtn}  size='medium' value={id} onClick={followHandler}
+                                                            variant="contained">Unfollow</Button>)
                                             )
 
                                             :
 
                                             (
                                                 (jsonUser.id == e[0].id ? <></> :
-                                                    <Button value={id} onClick={followHandler}
-                                                        variant="primary">Follow</Button>)
+                                                    <Button sx={followbtn}  size='medium' value={id} onClick={followHandler}
+                                                        variant="contained">Follow</Button>)
                                             )
                                     }
 
-                    </Row> */} 
-                    {/* it adds the follow button//not styled. */}
+                    </Row> 
 
                     </div>
                     
